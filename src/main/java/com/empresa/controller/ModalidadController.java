@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.empresa.entity.FiltroModalidad;
 import com.empresa.entity.Modalidad;
 import com.empresa.service.ModalidadService;
 import com.empresa.util.Constantes;
@@ -51,4 +53,22 @@ public class ModalidadController {
 		return ResponseEntity.ok(salida);
 	}
 
+	//Consulta usando JSON
+	@GetMapping("/porNombreSedePorJson")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> listaMOdalidadPorNombreSedeJson(@RequestBody FiltroModalidad obj) {
+		Map<String, Object> salida = new HashMap<String, Object>();
+		try {
+			List<Modalidad> lista = modalidadService.listaModalidadPorNombreSede(obj.getNombre() + "%", obj.getSede());
+			if (CollectionUtils.isEmpty(lista)) {
+				salida.put("mensaje", "No existe datos");
+			}else {
+				salida.put("lista", lista);
+			}
+		} catch (Exception e) {
+			salida.put("mensaje", "Error en la consulta " + e.getMessage());
+			e.printStackTrace();
+		} 
+		return ResponseEntity.ok(salida);
+	}
 }

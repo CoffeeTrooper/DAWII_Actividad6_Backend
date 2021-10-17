@@ -24,4 +24,23 @@ public class DocenteServiceImpl implements DocenteService {
 		return repository.save(obj);
 	}
 
+
+	@Override
+	public List<Docente> listaDocentePorNombreLike(String filtro) {
+		// TODO Auto-generated method stub
+		return repository.findByNombreLike(filtro + "%");
+	}
+
+	@Override
+	public List<Docente> listaDocentePorDni(String dni) {
+		// TODO Auto-generated method stub
+		return repository.findByDniEquals(dni);
+	}
+
+	@Override
+	public List<Docente> listaDocentePorNombreDni(String nombre, String Dni) {
+		// TODO Auto-generated method stub
+		return repository.listaPorNombreDni(nombre, Dni);
+	}
+
 }

@@ -24,4 +24,10 @@ public class ModalidadServiceImpl implements ModalidadService {
 		return repositorio.findAll();
 	}
 
+	@Override
+	public List<Modalidad> listaModalidadPorNombreSede(String nombre, String sede) {
+		// TODO Auto-generated method stub
+		return repositorio.listaPorNombreSede(nombre, sede);
+	}
+
 }

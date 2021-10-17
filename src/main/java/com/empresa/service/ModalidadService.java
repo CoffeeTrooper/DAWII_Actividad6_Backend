@@ -9,4 +9,6 @@ public interface ModalidadService {
 	public Modalidad insertaActualizaModalidad(Modalidad obj);
 	public List<Modalidad> listaModalidad();
 	
+	public abstract List<Modalidad> listaModalidadPorNombreSede(String nombre, String sede);
+
 }
